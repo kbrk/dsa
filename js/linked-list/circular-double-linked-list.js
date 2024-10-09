@@ -1,5 +1,6 @@
 class NodeCircularDouble {
     constructor(data) {
+        this.prev = null
         this.data = data;
         this.next = null
     }

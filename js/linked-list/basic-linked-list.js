@@ -15,6 +15,22 @@ node2.next = node3
 node3.next = node4
 
 
+const lowestValue = () => {
+    let currentNode = node1;
+    let min = node1.data;
+
+    while (currentNode) {
+        if (currentNode.data < min) {
+            min = currentNode.data;
+        }
+        currentNode = currentNode.next;
+    }
+    return min;
+}
+
+const min = lowestValue();
+console.log("The min value: ", min)
+
 const traverseNodes = (head) => {
     let log = '';
     let currentNode = head;
@@ -58,7 +74,6 @@ traverseNodes(node1AfterDelete);
 
 
 const insertNode = (head, newNode, position) => {
-    let isOutofBound = false;
     if (position <= 1) {
         newNode.next = head;
         return newNode // the new head is the new list
@@ -88,29 +103,29 @@ traverseNodes(inserted);
 const selectionSort = (head) => {
     let currentNode = head;
     if (!currentNode || !currentNode.next) {
-      return; // List is empty or has only one element
+        return; // List is empty or has only one element
     }
 
     while (currentNode.next !== null) {
-      let minNode = currentNode;
-      let nextNode = currentNode.next;
+        let minNode = currentNode;
+        let nextNode = currentNode.next;
 
-      while (nextNode !== null) {
-        if (nextNode.data < minNode.data) {
-          minNode = nextNode;
+        while (nextNode !== null) {
+            if (nextNode.data < minNode.data) {
+                minNode = nextNode;
+            }
+            nextNode = nextNode.next;
         }
-        nextNode = nextNode.next;
-      }
 
-      // Swap data of currentNode and minNode
-      const temp = currentNode.data;
-      currentNode.data = minNode.data;
-      minNode.data = temp;
+        // Swap data of currentNode and minNode
+        const temp = currentNode.data;
+        currentNode.data = minNode.data;
+        minNode.data = temp;
 
-      currentNode = currentNode.next;
+        currentNode = currentNode.next;
     }
     return head;
-  }
+}
 
 const sorted = selectionSort(inserted);
 traverseNodes(sorted)

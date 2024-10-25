@@ -50,16 +50,57 @@ const search = (node, target) => {
     }
 }
 
+/**
+ * 
+ * @param {*} node 
+ * @param {*} data 
+ * @returns 
+ */
 const insert = (node, data) => {
+    // if there is no node create the node to be inserted.
     if (!node) {
         return new TreeNode(data);
     }
-    if (data < node.data) {
+
+    if (data < node.data) { // if the data to be inserted lower than the current node.data, go to the left and continue until there is no right or left node.
         node.left = insert(node.left, data);
-    } else if (data > node.data) {
+    } else if (data > node.data) { // if the data to be inserted higher than the current node.data, go to the right and continue until there is no right or left node.
         node.right = insert(node.right, data);
     }
-    return node;
+    return node; // to maintain the recursion
+}
+
+var count = 0;
+const deleteNode = (node, data) => {
+    count++;
+    console.log(count, node, data);
+    if (!node) {
+        return null;
+    }
+
+    if (data < node.data) { // searching the node te be deleted.
+        node.left = deleteNode(node.left, data);
+    } else if (data > node.data) { // searching the node te be deleted.
+        node.right = deleteNode(node.right, data);
+    } else { // data == node.data
+        if (!node.left) {
+            let temp = node.right;
+            node = null;
+            return temp;
+        }
+
+        if (!node.right) {
+            let temp = node.left;
+            node = null;
+            return temp;
+        }
+
+        // if there are both left and right children go the successor (right) node to find the min value.
+        node.data = minValue(node.right, data);
+        node.right = deleteNode(node.right, node.data);
+    }
+
+    return node; // to maintain the recursion
 }
 
 const minValue = (node) => {
@@ -72,7 +113,7 @@ const minValue = (node) => {
 
 const maxValue = (node) => {
     let currentNode = node;
-    while(currentNode.right){
+    while (currentNode.right) {
         currentNode = currentNode.right;
     }
     return currentNode.data;
@@ -85,12 +126,17 @@ searchedNode = search(root, 8);
 console.log("Found Data: ", searchedNode.data);
 
 insert(root, 1);
-insert(root, 111);
-console.log("After insert: ");
-inOrderedTraversal(root);   
+// insert(root, 111);
+// console.log("After insert: ");
+// inOrderedTraversal(root);
 
 const min = minValue(root);
-console.log("Min. value: ", min); 
+console.log("Min. value: ", min);
 
 const max = maxValue(root);
 console.log("Max. value: ", max);
+
+deleteNode(root, 8);
+console.log("After delete root: ", root);
+console.log("After delete: ");
+inOrderedTraversal(root);

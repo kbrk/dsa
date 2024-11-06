@@ -51,6 +51,7 @@ class Graph {
 
     }
 
+    count = 0;
     /**
      * @description Depth first search traversal of all adjacent vertices.
      * @param {number} iVertex: index of the vertex 
@@ -59,9 +60,14 @@ class Graph {
     dfsTraverse(iVertex, arrayIsVisited) {
         console.log(this.arrayVertex[iVertex]);
         arrayIsVisited[iVertex] = true;
+        this.count++;
+
 
         for (let i in this.matrixAdjacent) {
-            i= parseInt(i);
+            if (this.count == this.size) {
+                break;
+            }
+            i = parseInt(i);
             if (!arrayIsVisited[i] && this.matrixAdjacent[iVertex][i] == 1) {
                 this.dfsTraverse(i, arrayIsVisited);
             }
@@ -81,6 +87,29 @@ class Graph {
         }
         this.dfsTraverse(iVertex, arrayIsVisited);
     }
+
+    /**
+     * 
+     * @param {string} startVertex: starting vertex 
+     */
+    breadthFirstSearch(startVertex) {
+        let queue = [this.arrayVertex.indexOf(startVertex)]; // initiate the queue with the start vertex.
+        let arrayIsVisited = Array.from({ leength: this.size }, () => false); //  the visiting status of all vertices is false.
+        arrayIsVisited[queue[0]] = true; // the first vertex is visited.
+
+        while (queue.length > 0) {
+            let iCurrentVertex = queue.pop();
+            console.log(this.arrayVertex[iCurrentVertex]);
+
+            for (let i in this.matrixAdjacent) {
+                i = parseInt(i);
+                if (!arrayIsVisited[i] && this.matrixAdjacent[iCurrentVertex][i] == 1) {
+                    queue.push(i);
+                    arrayIsVisited[i] = true;
+                }
+            }
+        }
+    }
 }
 
 const graph = new Graph(4);
@@ -99,3 +128,6 @@ graph.printGraph();
 
 console.log('Depth First Search Traversal:');
 graph.depthFirstSearch('C');
+
+console.log('Breadth First Search Traversal:');
+graph.breadthFirstSearch('C');

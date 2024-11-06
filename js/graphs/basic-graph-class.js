@@ -30,7 +30,7 @@ class Graph {
      * @param {number} iConnected: the connected data index of the vertex data in the iVertex.
      */
     addEdge(iVertex, iConnected, weight) {
-        if(0 <= iVertex < this.size && 0 <= iConnected < this.size){
+        if (0 <= iVertex < this.size && 0 <= iConnected < this.size) {
             this.matrixAdjacent[iVertex][iConnected] = 1; // the connection
             this.matrixAdjacent[iConnected][iVertex] = 1; // the symetric connection
 
@@ -50,6 +50,37 @@ class Graph {
         }
 
     }
+
+    /**
+     * @description Depth first search traversal of all adjacent vertices.
+     * @param {number} iVertex: index of the vertex 
+     * @param {array} arrayIsVisited: array showing the visiting status of its elements. 
+     */
+    dfsTraverse(iVertex, arrayIsVisited) {
+        console.log(this.arrayVertex[iVertex]);
+        arrayIsVisited[iVertex] = true;
+
+        for (let i in this.matrixAdjacent) {
+            i= parseInt(i);
+            if (!arrayIsVisited[i] && this.matrixAdjacent[iVertex][i] == 1) {
+                this.dfsTraverse(i, arrayIsVisited);
+            }
+        }
+    }
+
+    /**
+     * Initiator function of depth first search
+     * @param {string} startVertex: starting vertex  
+     */
+    depthFirstSearch(startVertex) {
+        const arrayIsVisited = Array.from({ length: this.size }, () => false); // the visiting status of all vertices is false
+        const iVertex = this.arrayVertex.indexOf(startVertex);
+        if (iVertex == -1) {
+            console.log(`The vertex ${startVertex} is not present.`);
+            return;
+        }
+        this.dfsTraverse(iVertex, arrayIsVisited);
+    }
 }
 
 const graph = new Graph(4);
@@ -65,3 +96,6 @@ graph.addEdge(2, 1, 1); // C connected to B with weight 1
 
 console.log('The vertex array: ', graph.arrayVertex);
 graph.printGraph();
+
+console.log('Depth First Search Traversal:');
+graph.depthFirstSearch('C');

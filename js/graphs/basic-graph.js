@@ -1,4 +1,4 @@
-var arrayVertex = ['A', 'B', 'C', 'D'];
+var arrayVertex = ['A', 'B', 'C', 'D']; // the edge points
 var arrayConnection = [
     [0, 1, 1, 1],
     [1, 0, 1, 0],

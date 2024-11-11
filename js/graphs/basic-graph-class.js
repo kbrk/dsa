@@ -28,6 +28,7 @@ class Graph {
      * 
      * @param {number} iVertex: the vertex data index.
      * @param {number} iConnected: the connected data index of the vertex data in the iVertex.
+     * @param {number} weight: weight of the connection   
      */
     addEdge(iVertex, iConnected, weight) {
         if (0 <= iVertex < this.size && 0 <= iConnected < this.size) {
@@ -48,7 +49,6 @@ class Graph {
         for (let row = 0; row < this.size; row++) {
             console.log(this.matrixAdjacentWeight[row].join(' '));
         }
-
     }
 
     count = 0;
@@ -95,7 +95,7 @@ class Graph {
     breadthFirstSearch(startVertex) {
         let queue = [this.arrayVertex.indexOf(startVertex)]; // initiate the queue with the start vertex.
         let arrayIsVisited = Array.from({ leength: this.size }, () => false); //  the visiting status of all vertices is false.
-        arrayIsVisited[queue[0]] = true; // the first vertex is visited.
+        arrayIsVisited[queue[0]] = true; // Mark the first vertex is visited.
 
         while (queue.length > 0) {
             let iCurrentVertex = queue.pop();

@@ -94,18 +94,25 @@ class Graph {
      */
     breadthFirstSearch(startVertex) {
         let queue = [this.arrayVertex.indexOf(startVertex)]; // initiate the queue with the start vertex.
-        let arrayIsVisited = Array.from({ leength: this.size }, () => false); //  the visiting status of all vertices is false.
+        let arrayIsVisited = Array.from({ length: this.size }, () => false); //  the visiting status of all vertices is false.
         arrayIsVisited[queue[0]] = true; // the first vertex is visited.
 
         while (queue.length > 0) {
             let iCurrentVertex = queue.pop();
             console.log(this.arrayVertex[iCurrentVertex]);
-
+            
             for (let i in this.matrixAdjacent) {
                 i = parseInt(i);
                 if (!arrayIsVisited[i] && this.matrixAdjacent[iCurrentVertex][i] == 1) {
                     queue.push(i);
                     arrayIsVisited[i] = true;
+                    const isDone = !arrayIsVisited.some((e) => {return e == false});
+                    
+                    // write down the last vertex and quit.
+                    if(isDone){
+                        console.log(this.arrayVertex[i]);
+                        return;
+                    }
                 }
             }
         }

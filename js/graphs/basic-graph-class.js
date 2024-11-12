@@ -94,13 +94,8 @@ class Graph {
      */
     breadthFirstSearch(startVertex) {
         let queue = [this.arrayVertex.indexOf(startVertex)]; // initiate the queue with the start vertex.
-<<<<<<< HEAD
-        let arrayIsVisited = Array.from({ length: this.size }, () => false); //  the visiting status of all vertices is false.
-        arrayIsVisited[queue[0]] = true; // the first vertex is visited.
-=======
         let arrayIsVisited = Array.from({ leength: this.size }, () => false); //  the visiting status of all vertices is false.
         arrayIsVisited[queue[0]] = true; // Mark the first vertex is visited.
->>>>>>> 165e81285db77a7fd3ab6a49609fe6c167a1dd7b
 
         while (queue.length > 0) {
             let iCurrentVertex = queue.pop();

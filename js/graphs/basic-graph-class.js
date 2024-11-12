@@ -106,13 +106,6 @@ class Graph {
                 if (!arrayIsVisited[i] && this.matrixAdjacent[iCurrentVertex][i] == 1) {
                     queue.push(i);
                     arrayIsVisited[i] = true;
-                    const isDone = !arrayIsVisited.some((e) => {return e == false});
-                    
-                    // write down the last vertex and quit.
-                    if(isDone){
-                        console.log(this.arrayVertex[i]);
-                        return;
-                    }
                 }
             }
         }

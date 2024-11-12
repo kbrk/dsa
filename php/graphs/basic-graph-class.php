@@ -52,25 +52,26 @@ class Graph
 
     public function printGraph()
     {
-        print_r('The Adjecency Matrix:'."\n");
+        print_r('The Adjecency Matrix:' . "\n");
         for ($row = 0; $row < $this->size; $row++) {
-            print_r(implode(' ', $this->matrixAdjacent[$row])."\n");
+            print_r(implode(' ', $this->matrixAdjacent[$row]) . "\n");
         }
 
-        print_r('The Adjecency Matrix with Weight:'."\n");
+        print_r('The Adjecency Matrix with Weight:' . "\n");
         for ($row = 0; $row < $this->size; $row++) {
-            print_r(implode(' ', $this->matrixAdjacentWeight[$row])."\n");
+            print_r(implode(' ', $this->matrixAdjacentWeight[$row]) . "\n");
         }
     }
 
     private $count = 0;
 
-     /**
+    /**
      * Depth first search traversal of all adjacent vertices.
      * @param int iVertex: index of the vertex 
      * @param array arrayIsVisited: array showing the visiting status of its elements. 
      */
-    public function dfsTraverse($iVertex, $arrayIsVisited) {
+    public function dfsTraverse($iVertex, $arrayIsVisited)
+    {
         echo $this->arrayVertex[$iVertex] . "\n";
         $arrayIsVisited[$iVertex] = true;
         $this->count++;
@@ -89,7 +90,8 @@ class Graph
      * Initiator function of depth first search
      * @param string startVertex: starting vertex  
      */
-    public function depthFirstSearch(string $startVertex) {
+    public function depthFirstSearch(string $startVertex)
+    {
         $visited = array_fill(0, $this->size, false); // Initialize visited array
         $iVertex = array_search($startVertex, $this->arrayVertex);
 
@@ -105,7 +107,8 @@ class Graph
      * 
      * @param string startVertex: starting vertex 
      */
-    public function breadthFirstSearch(string $startVertex) {
+    public function breadthFirstSearch(string $startVertex)
+    {
         $queue = [array_search($startVertex, $this->arrayVertex)]; // Initialize the queue with the start vertex index
         $visited = array_fill(0, $this->size, false); // Initialize the visited array. The visiting status of all vertices is false.
         $visited[$queue[0]] = true; // Mark the first vertex as visited
@@ -122,8 +125,6 @@ class Graph
             }
         }
     }
-
-    
 }
 
 $graph = new Graph(4);
@@ -145,8 +146,8 @@ print_r($graph->arrayVertex);
 $graph->printGraph();
 
 
-print_r('Depth First Search Traversal: '. "\n");
+print_r('Depth First Search Traversal: ' . "\n");
 $graph->depthFirstSearch('C');
 
-print_r('Breadth First Search Traversal: '. "\n");
+print_r('Breadth First Search Traversal: ' . "\n");
 $graph->breadthFirstSearch('C');

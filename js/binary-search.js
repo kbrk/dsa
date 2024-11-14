@@ -30,17 +30,14 @@ const binarySearch = (nums, numSearched) => {
     }
 }
 
-let a = 1, b = null;
-console.log(a&b);
+const nums = randomNumericArray(0, 100).sort(function (a, b) { return a - b }); //sorted random array
+const tmp = [...nums]
+const iSearched = Math.floor(Math.random() * (nums.length)); // randomly generated searched index
+const numSearched = nums[iSearched];
 
-// const nums = randomNumericArray(0, 100).sort(function (a, b) { return a - b }); //sorted random array
-// const tmp = [...nums]
-// const iSearched = Math.floor(Math.random() * (nums.length)); // randomly generated searched index
-// const numSearched = nums[iSearched];
-
-// console.log("Random Array: ", nums);
-// console.log("Searched Number: ", numSearched);
+console.log("Random Array: ", nums);
+console.log("Searched Number: ", numSearched);
 
 
-// const result = binarySearch(tmp, numSearched);
-// console.log("Result: ", result);
+const result = binarySearch(tmp, numSearched);
+console.log("Result: ", result);

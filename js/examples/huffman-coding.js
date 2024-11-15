@@ -87,7 +87,7 @@ const huffmanCoding = (node, currentCode, codes) => {
 const huffmanEncoding = (text) => {
     const frequency = characterFrequencies(text);
     setNodes(frequency);
-    const root = setHuffmanTree(); 
+    const root = setHuffmanTree();
     let codes = {};
     huffmanCoding(root, '', codes);
     return codes;
@@ -101,6 +101,17 @@ const encode = (text, codeTable) => {
     return encodedText;
 }
 
+const stringto8BitBinary = (text) => {
+    const textEncoder = new TextEncoder();
+    const utf8 = new Uint8Array();
+
+    const encoded = textEncoder.encode(text);
+    let strBinary = '';
+    encoded.forEach(i => {
+        strBinary += '0'+`${i.toString(2)}`;
+    });
+    return strBinary;
+}
 
 /**
  * 
@@ -111,7 +122,7 @@ const encode = (text, codeTable) => {
 const decodeHuffmanCode = (code, codeTable) => {
     let decodedText = '';
     const controlTable = {};
-    
+
     //swap the keys and values
     Object.keys(codeTable).forEach(key => {
         controlTable[codeTable[key]] = key;
@@ -132,8 +143,11 @@ const decodeHuffmanCode = (code, codeTable) => {
     return decodedText;
 }
 
-const text = 'a sample';
+const text = 'lossless';
 console.log("Text: ", text);
+
+const text8BitBinary = stringto8BitBinary(text); 
+console.log("8 Bit Binary: ", text8BitBinary); 
 
 const codeTable = huffmanEncoding(text);
 console.log("Code Table: ", codeTable);
